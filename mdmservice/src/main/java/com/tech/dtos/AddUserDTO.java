@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddUserDTO {
+
     private String username;
 
     private String email;
@@ -13,4 +14,5 @@ public class AddUserDTO {
     private String password;
 
     private String roleType;
+
 }

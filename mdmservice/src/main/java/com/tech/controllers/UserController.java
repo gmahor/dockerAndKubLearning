@@ -18,28 +18,42 @@ public class UserController {
 
     @PostMapping("/add-user")
     public ResponseEntity<String> addUser(@RequestBody AddUserDTO addUserDTO){
-       String result =  userService.addUser(addUserDTO);
-       return new ResponseEntity<>(result, HttpStatus.OK);
+        try{
+            String result =  userService.addUser(addUserDTO);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PutMapping("/update-user")
     public ResponseEntity<String> updateUser(@RequestBody AddUserDTO addUserDTO){
-        String result =  userService.updateUser(addUserDTO);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            String result = userService.updateUser(addUserDTO);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/get-user-by-id")
     public ResponseEntity<Users> getUser(@PathVariable Long id){
-        Users user =  userService.getUser(id);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        try {
+            Users user = userService.getUser(id);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @DeleteMapping("/delete-user-by-id")
     public ResponseEntity<String> deleteUser(@PathVariable Long id){
-        String result =  userService.delete(id);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            String result = userService.delete(id);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
-
 
 }
