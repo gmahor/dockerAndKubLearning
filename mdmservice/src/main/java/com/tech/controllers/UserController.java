@@ -1,7 +1,10 @@
 package com.tech.controllers;
 
+import com.tech.commons.DataContainer;
+import com.tech.commons.GlobalConstant;
+import com.tech.commons.GlobalUrl;
+import com.tech.commons.ResponseHandler;
 import com.tech.dtos.AddUserDTO;
-import com.tech.enities.Users;
 import com.tech.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,48 +15,65 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class UserController {
+public class UserController{
 
     private final UserService userService;
+    private final ResponseHandler responseHandler;
 
-    @PostMapping("/add-user")
-    public ResponseEntity<String> addUser(@RequestBody AddUserDTO addUserDTO){
+    @PostMapping(GlobalUrl.ADD_USER)
+    public ResponseEntity<Object> addUser(@RequestBody AddUserDTO addUserDTO){
+        DataContainer data = new DataContainer();
         try{
-            String result =  userService.addUser(addUserDTO);
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            data =  userService.addUser(addUserDTO);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error(GlobalConstant.ERROR_AT.getMessage(), GlobalUrl.ADD_USER, e.toString());
+            data.setMsg(e.getMessage());
+            return responseHandler.response("", data.getMsg(), true, HttpStatus.BAD_REQUEST);
         }
+        boolean isSuccess = null != data.getMsgToCheck() && data.getMsgToCheck().equals(GlobalConstant.MSG_SUCCESS.getMessage());
+        return responseHandler.response(isSuccess ? data.getData() : "", data.getMsg(), isSuccess, HttpStatus.OK);
     }
 
-    @PutMapping("/update-user")
-    public ResponseEntity<String> updateUser(@RequestBody AddUserDTO addUserDTO){
+    @PutMapping(GlobalUrl.UPDATE_USER)
+    public ResponseEntity<Object> updateUser(@RequestBody AddUserDTO addUserDTO){
+        DataContainer data = new DataContainer();
         try {
-            String result = userService.updateUser(addUserDTO);
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            data = userService.updateUser(addUserDTO);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error(GlobalConstant.ERROR_AT.getMessage(), GlobalUrl.UPDATE_USER, e.toString());
+            data.setMsg(GlobalConstant.MSG_ERROR.getMessage());
+            return responseHandler.response("", data.getMsg(), true, HttpStatus.BAD_REQUEST);
         }
+        boolean isSuccess = null != data.getMsgToCheck() && data.getMsgToCheck().equals(GlobalConstant.MSG_SUCCESS.getMessage());
+        return responseHandler.response(isSuccess ? data.getData() : "", data.getMsg(), isSuccess, HttpStatus.OK);
     }
 
-    @GetMapping("/get-user-by-id")
-    public ResponseEntity<Users> getUser(@PathVariable Long id){
+    @GetMapping(GlobalUrl.GET_USER_BY_ID+"/{id}")
+    public ResponseEntity<Object> getUser(@PathVariable("id") Long id){
+        DataContainer data = new DataContainer();
         try {
-            Users user = userService.getUser(id);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            data = userService.getUser(id);
         }catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error(GlobalConstant.ERROR_AT.getMessage(), GlobalUrl.GET_USER_BY_ID, e.toString());
+            data.setMsg(GlobalConstant.MSG_ERROR.getMessage());
+            return responseHandler.response("", data.getMsg(), true, HttpStatus.BAD_REQUEST);
         }
+        boolean isSuccess = null != data.getMsgToCheck() && data.getMsgToCheck().equals(GlobalConstant.MSG_SUCCESS.getMessage());
+        return responseHandler.response(isSuccess ? data.getData() : "", data.getMsg(), isSuccess, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete-user-by-id")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+    @DeleteMapping(GlobalUrl.DELETE_USER_BY_ID+"/{id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable("id") Long id){
+        DataContainer data = new DataContainer();
         try {
-            String result = userService.delete(id);
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            data = userService.delete(id);
         }catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error(GlobalConstant.ERROR_AT.getMessage(), GlobalUrl.DELETE_USER_BY_ID, e.toString());
+            data.setMsg(GlobalConstant.MSG_ERROR.getMessage());
+            return responseHandler.response("", data.getMsg(), true, HttpStatus.BAD_REQUEST);
         }
+        boolean isSuccess = null != data.getMsgToCheck() && data.getMsgToCheck().equals(GlobalConstant.MSG_SUCCESS.getMessage());
+        return responseHandler.response(isSuccess ? data.getData() : "", data.getMsg(), isSuccess, HttpStatus.OK);
     }
 
 }
