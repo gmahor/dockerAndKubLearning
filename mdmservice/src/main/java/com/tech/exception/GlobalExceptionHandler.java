@@ -21,4 +21,12 @@ public class GlobalExceptionHandler {
                 HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception,
+                                                                  WebRequest webRequest) {
+        return responseHandler.errorResp(webRequest.getDescription(false),
+                exception.getMessage(),
+                HttpStatus.NOT_FOUND);
+    }
+
 }
