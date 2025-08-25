@@ -16,3 +16,4 @@ target/
 .springBeans
 .log
 ##############
+/.metadata/
