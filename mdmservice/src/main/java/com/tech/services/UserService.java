@@ -1,10 +1,10 @@
 package com.tech.services;
 
-import com.tech.commons.DataContainer;
 import com.tech.commons.GlobalConstant;
 import com.tech.dtos.AddUserDTO;
 import com.tech.enities.Users;
 import com.tech.enums.RoleType;
+import com.tech.exception.ResourceNotFoundException;
 import com.tech.repos.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ public class UserService {
     //add
     public String addUser(AddUserDTO addUserDTO) {
         if (!isValidRole(addUserDTO.getRoleType())) {
-            throw new IllegalArgumentException("Invalid Role: " + addUserDTO.getRoleType());
+            throw new ResourceNotFoundException("Role", "Role Type", addUserDTO.getRoleType());
         }
 
         userRepo.findByUsername(addUserDTO.getUsername())
@@ -38,8 +38,7 @@ public class UserService {
     }
 
     //update
-    public DataContainer updateUser(AddUserDTO addUserDTO) {
-        DataContainer data = new DataContainer();
+    public String updateUser(AddUserDTO addUserDTO) {
         String username = addUserDTO.getUsername();
 
         if (!isValidRole(addUserDTO.getRoleType())) {
@@ -54,32 +53,21 @@ public class UserService {
         RoleType role = RoleType.valueOf(addUserDTO.getRoleType());
         user.setRoleType(role);
         userRepo.save(user);
-        data.setMsg(GlobalConstant.USER_UPDATE_SUCCESS.getMessage());
-        data.setMsgToCheck(GlobalConstant.MSG_SUCCESS.getMessage());
-        return data;
+        return GlobalConstant.USER_UPDATE_SUCCESS.getMessage();
     }
 
-
     //get
-    public DataContainer getUser(Long userId) {
-        DataContainer data = new DataContainer();
-        Users user = userRepo.findById(userId)
-                .orElseThrow(() -> new RuntimeException(GlobalConstant.USER_NOT_FOUNT.getMessage()));
-        data.setData(user);
-        data.setMsg(GlobalConstant.MSG_SUCCESS.getMessage());
-        data.setMsgToCheck(GlobalConstant.MSG_SUCCESS.getMessage());
-        return data;
+    public Users getUser(Long userId) {
+        return userRepo.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "User Id", userId.toString()));
     }
 
     //delete
-    public DataContainer delete(Long userId) {
-        DataContainer data = new DataContainer();
+    public String delete(Long userId) {
         Users user = userRepo.findById(userId)
-                .orElseThrow(() -> new RuntimeException(GlobalConstant.USER_NOT_FOUNT.getMessage()));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "User Id", userId.toString()));
         userRepo.deleteById(user.getId());
-        data.setMsgToCheck(GlobalConstant.MSG_SUCCESS.getMessage());
-        data.setMsg(GlobalConstant.USER_DELETED_SUCCESS.getMessage());
-        return data;
+        return GlobalConstant.USER_DELETED_SUCCESS.getMessage();
     }
 
     private boolean isValidRole(String role) {
