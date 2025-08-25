@@ -8,11 +8,21 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+import java.time.LocalDateTime;
+
 @ControllerAdvice
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
     private final ResponseHandler responseHandler;
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleGlobalException(Exception exception,
+                                                                  WebRequest webRequest) {
+        return responseHandler.errorResp(webRequest.getDescription(false),
+                exception.getMessage(),
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     @ExceptionHandler(InvalidRoleException.class)
     public ResponseEntity<Object> invalidRoleException(InvalidRoleException e, WebRequest webRequest) {
