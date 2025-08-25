@@ -14,13 +14,22 @@ public class ResponseHandler {
     private ResponseHandler() {
     }
 
-    public ResponseEntity<Object> response(Object response, String message, boolean isSuccess, HttpStatus httpStatus) {
+    public ResponseEntity<Object> successResp(Object response, String message, boolean isSuccess, HttpStatus httpStatus) {
         Map<String, Object> map = new HashMap<>();
         map.put("data", response);
         map.put("message", message);
         map.put("isSuccess", isSuccess);
         map.put("statusCode", httpStatus.value());
         map.put("timeStamp", LocalDateTime.now());
+        return new ResponseEntity<>(map, httpStatus);
+    }
+
+
+    public ResponseEntity<Object> errorResp(String apiPath,  String errorMessage,HttpStatus httpStatus) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("apiPath", apiPath);
+        map.put("errorMessage", errorMessage);
+        map.put("errorTime", LocalDateTime.now());
         return new ResponseEntity<>(map, httpStatus);
     }
 }

@@ -18,9 +18,7 @@ public class UserService {
     private final UserRepo userRepo;
 
     //add
-    public DataContainer addUser(AddUserDTO addUserDTO) {
-        DataContainer data = new DataContainer();
-
+    public String addUser(AddUserDTO addUserDTO) {
         if (!isValidRole(addUserDTO.getRoleType())) {
             throw new IllegalArgumentException("Invalid Role: " + addUserDTO.getRoleType());
         }
@@ -36,9 +34,7 @@ public class UserService {
         user.setPassword(addUserDTO.getPassword());
         user.setRoleType(RoleType.valueOf(addUserDTO.getRoleType()));
         userRepo.save(user);
-        data.setMsg(GlobalConstant.USER_ADDED_SUCCESS.getMessage());
-        data.setMsgToCheck(GlobalConstant.MSG_SUCCESS.getMessage());
-        return data;
+        return GlobalConstant.USER_ADDED_SUCCESS.getMessage();
     }
 
     //update

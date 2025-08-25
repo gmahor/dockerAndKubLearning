@@ -10,19 +10,6 @@ spring:
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
-    type: com.zaxxer.hikari.HikariDataSource
-
-    hikari:
-      minimum-idle: 5
-      maximum-pool-size: 20
-      idle-timeout: 600000         # 10 minutes
-      connection-timeout: 30000    # 30 seconds
-      max-lifetime: 1800000        # 30 minutes
-      leak-detection-threshold: 30000  # Detect slow connections
-      pool-name: HikariPool-Prod
-      auto-commit: false
-      register-mbeans: true
-
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
@@ -35,28 +22,3 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         jdbc:
           time_zone: Asia/Kolkata
-
-springdoc:
-  api-docs:
-    enabled: true
-    path: /v3/api-docs
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui.html
-    operationsSorter: method
-    tagsSorter: alpha
-  show-actuator: true
-
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-    eurekaServerConnectTimeoutSeconds: 10
-    eurekaServerReadTimeoutSeconds: 10
-    eurekaServerTotalConnections: 200
-    eurekaServerTotalConnectionsPerHost: 50
-    executorThreadPoolSize: 10
-  instance:
-    instance-id: ${spring.application.name}:${random.uuid}
