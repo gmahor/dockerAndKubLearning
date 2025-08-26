@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e3c1a779-4c7b-4ef3-83df-63cf1563b0c8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mdmservice/src/main/java/com/tech/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/mdmservice/src/main/java/com/tech/exception/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mdmservice/src/main/java/com/tech/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/mdmservice/src/main/java/com/tech/services/UserService.java" afterDir="false" />
     </list>
     <list id="5b694f7d-7ec1-4f04-b315-d2418328bf48" name="Changes by verma.shivam" comment="" />
@@ -44,40 +45,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MdmserviceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.discoveryserver [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.gateway [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.mdmservice [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.userauth [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;Database connection parameters found&quot;,
-    &quot;Notification.DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.DiscoveryserverApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.GatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.MdmserviceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.UserauthApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/Downloads/springboot-jsp-demo&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MdmserviceApplication.executor": "Run",
+    "Maven.discoveryserver [clean,install].executor": "Run",
+    "Maven.gateway [clean,install].executor": "Run",
+    "Maven.mdmservice [clean,install].executor": "Run",
+    "Maven.userauth [clean,install].executor": "Run",
+    "Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found": "Database connection parameters found",
+    "Notification.DoNotAsk-DatabaseConfigFileWatcher.found": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.DiscoveryserverApplication.executor": "Run",
+    "Spring Boot.GatewayApplication.executor": "Run",
+    "Spring Boot.MdmserviceApplication.executor": "Run",
+    "Spring Boot.UserauthApplication.executor": "Run",
+    "git-widget-placeholder": "vishwajeet-dev",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Admin/Downloads/springboot-jsp-demo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.tech.config" />
@@ -93,7 +94,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.MdmserviceApplication">
+  <component name="RunManager" selected="Application.MdmserviceApplication">
     <configuration name="MdmserviceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tech.MdmserviceApplication" />
       <module name="mdmservice" />
@@ -125,8 +126,6 @@
     </configuration>
     <list>
       <item itemvalue="Application.MdmserviceApplication" />
-      <item itemvalue="Spring Boot.MdmserviceApplication" />
-      <item itemvalue="Spring Boot.UserauthApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -169,7 +168,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/mdmservice/src/main/java/com/tech/services/UserService.java</url>
-          <line>42</line>
+          <line>45</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

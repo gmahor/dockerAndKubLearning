@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import java.time.LocalDateTime;
-
 @ControllerAdvice
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
@@ -18,7 +16,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGlobalException(Exception exception,
-                                                                  WebRequest webRequest) {
+                                                        WebRequest webRequest) {
         return responseHandler.errorResp(webRequest.getDescription(false),
                 exception.getMessage(),
                 HttpStatus.INTERNAL_SERVER_ERROR);
@@ -37,6 +35,14 @@ public class GlobalExceptionHandler {
         return responseHandler.errorResp(webRequest.getDescription(false),
                 exception.getMessage(),
                 HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(AlreadyFoundException.class)
+    public ResponseEntity<Object> handleAlreadyFoundException(AlreadyFoundException exception,
+                                                                  WebRequest webRequest) {
+        return responseHandler.errorResp(webRequest.getDescription(false),
+                exception.getMessage(),
+                HttpStatus.BAD_REQUEST);
     }
 
 }
