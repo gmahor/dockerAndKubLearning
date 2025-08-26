@@ -4,11 +4,14 @@ import com.tech.commons.GlobalConstant;
 import com.tech.dtos.AddUserDTO;
 import com.tech.enities.Users;
 import com.tech.enums.RoleType;
+import com.tech.exception.AlreadyFoundException;
 import com.tech.exception.ResourceNotFoundException;
 import com.tech.repos.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.rmi.AlreadyBoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +28,7 @@ public class UserService {
 
         userRepo.findByUsername(addUserDTO.getUsername())
                 .ifPresent(u -> {
-                    throw new IllegalStateException("User already exists with username: " + addUserDTO.getUsername());
+                    throw new AlreadyFoundException("User","username",u.getUsername());
                 });
 
         Users user = new Users();
@@ -42,11 +45,11 @@ public class UserService {
         String username = addUserDTO.getUsername();
 
         if (!isValidRole(addUserDTO.getRoleType())) {
-            throw new IllegalArgumentException("Invalid Role: " + addUserDTO.getRoleType());
+            throw new ResourceNotFoundException("Role", "Role Type", addUserDTO.getRoleType());
         }
 
         Users user = userRepo.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Username", username));
         user.setEmail(addUserDTO.getEmail());
         user.setUsername(addUserDTO.getUsername());
         user.setPassword(addUserDTO.getPassword());
