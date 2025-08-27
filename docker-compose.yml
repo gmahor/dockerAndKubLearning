@@ -8,15 +8,38 @@ services:
       resources:
         limits:
           memory: 700m
+    restart: always
     depends_on:
       - mysql
     environment:
+      SERVER_PORT: 8181
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/learntech?allowPublicKeyRetrieval=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: admin123
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     networks:
       - learntech
+        
+  userauth:
+      image: "userauth:latest"
+      container_name: "userauth-ua"
+      ports:
+        - "8282:8282"
+      deploy:
+        resources:
+          limits:
+            memory: 700m
+      restart: always
+      depends_on:
+      - mysql
+      environment:
+        SERVER_PORT: 8282
+        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/learntech?allowPublicKeyRetrieval=true&useSSL=false
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD: admin123
+        SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      networks:
+        - learntech
 
   mysql:
     image: mysql:latest
