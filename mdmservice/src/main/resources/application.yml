@@ -6,12 +6,12 @@ spring:
     name: mdmservice
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/learntech
-    username: postgres
-    password: root
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://localhost:3306/learntech?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: admin123
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
     properties:
@@ -19,6 +19,6 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
         jdbc:
           time_zone: Asia/Kolkata

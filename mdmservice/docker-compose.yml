@@ -1,0 +1,40 @@
+services:
+  mdmservice:
+    image: "mdmservice:latest"
+    container_name: "mdmservice-ms"
+    ports:
+      - "8181:8181"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/learntech?allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    networks:
+      - learntech
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: learntech
+      MYSQL_ROOT_PASSWORD: admin123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    networks:
+      - learntech
+
+volumes:
+  mysqldata:
+
+networks:
+  learntech:
+    driver: bridge
